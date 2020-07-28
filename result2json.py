@@ -1,4 +1,5 @@
 import os
+import sys
 import json
 import numpy as np
 import glob
@@ -19,7 +20,7 @@ def voc_maskrcnn(voc_result_dir,maskrcnn_result_dir,video_name,frame_name_path):
     '''
     file_path = voc_result_dir+'/*.txt'
     print(glob.glob(file_path))
-    filename = os.path.join(maskrcnn_result_dir,video_name+'.json')
+    filename = os.path.join(maskrcnn_result_dir,video_name)
     print('the filename is: ', filename)
     result_list,result_dic = file_init(file_path)
     if not result_list:
@@ -56,16 +57,16 @@ def voc_maskrcnn(voc_result_dir,maskrcnn_result_dir,video_name,frame_name_path):
             json.dump(result_dic, f,indent=4)
             print('create output %s '%(filename))
 
-vvoc_result_dir = './darknet/results' #dir that containing all the txt results
-maskrcnn_result_dir = './result_in_json/' #dir that you want to save the result
+if __name__ == "__main__":
+    vvoc_result_dir = './results' #dir that containing all the txt results
+    maskrcnn_result_dir = sys.argv[1] #dir that you want to save the result
+    with open("./config/traffic.data", "r") as f:
+        for line in f:
+            word = line.split()
+            #print('this is line:', word)
+            if word[0]=='valid':
+                frame_name_path = word[2]
 
-with open("./config/traffic.data", "r") as f:
-    for line in f:
-        word = line.split()
-        #print('this is line:', word)
-        if word[0]=='valid':
-            frame_name_path = word[2]
-
-# frame_name_path = '~/test_traffic_video_HIKL1D190911T153514_20190920_0700_0830_90sec_calibration.mp4.txt' #txt file contains all the frames
-video_name = 'res_for_eval' # inference video name or anything you want to name the json file
-voc_maskrcnn(vvoc_result_dir,maskrcnn_result_dir,video_name,frame_name_path)
+    # frame_name_path = '~/test_traffic_video_HIKL1D190911T153514_20190920_0700_0830_90sec_calibration.mp4.txt' #txt file contains all the frames
+    video_name = sys.argv[2] # inference video name or anything you want to name the json file
+    voc_maskrcnn(vvoc_result_dir,maskrcnn_result_dir,video_name,frame_name_path)
