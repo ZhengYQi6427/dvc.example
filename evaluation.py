@@ -991,11 +991,14 @@ class DetectionMeasurement:
 
 
 if __name__=='__main__':
-    with open('./traffic_video_GP010589_190720_0310_0440_90sec_calibrated_stable.json', 'r') as f:
+    ground_truth = sys.argv[1]
+    pred_res = sys.argv[2]
+    
+    with open(ground_truth, 'r') as f:
         actual = json.load(f)
         #print('the type of actual is: ', type(actual))
 
-    with open('./result_in_json/res_for_eval.json', 'r') as f1:
+    with open(pred_res, 'r') as f1:
         pred = json.load(f1)
         #print('the type of pred is: ', type(pred))
 
