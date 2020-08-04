@@ -1,0 +1,34 @@
+stages:
+  testSet:
+    cmd: python generate_testset.py ./data/test/
+    deps:
+    - ./data/test/HIKL2D200326T170529_3_0458_0628_calibrated.mp4
+    - generate_testset.py
+    outs:
+    - test_HIKL2D200326T170529_3_0458_0628_calibrated.mp4.txt
+  validation:
+    cmd: ../../darknet/darknet detector valid ./config/traffic.data ./config/traffic.cfg
+      ./backup/traffic_final.weights -dont_show
+    deps:
+    - ./backup/traffic_final.weights
+    - ./config/traffic.cfg
+    - ./config/traffic.data
+    outs:
+    - ./results/:
+        persist: true
+  res-convert:
+    cmd: python result2json.py ./result_in_json/ res_for_eval.json
+    deps:
+    - ./config/traffic.data
+    - ./results
+    - result2json.py
+    outs:
+    - ./result_in_json/res_for_eval.json
+  evaluation:
+    cmd: python evaluation.py ./traffic_video_GP010589_190720_0310_0440_90sec_calibrated_stable.json
+      ./result_in_json/res_for_eval.json
+    deps:
+    - ./result_in_json/res_for_eval.json
+    - evaluation.py
+    metrics:
+    - metrics.json

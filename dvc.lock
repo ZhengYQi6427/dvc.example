@@ -1,0 +1,46 @@
+testSet:
+  cmd: python generate_testset.py ./data/test/
+  deps:
+  - path: ./data/test/HIKL2D200326T170529_3_0458_0628_calibrated.mp4
+    md5: 89842ce559d3885548d67d51aa762fda
+  - path: generate_testset.py
+    md5: 213489fd0ffd0df7eaeef875ed3fae05
+  outs:
+  - path: test_HIKL2D200326T170529_3_0458_0628_calibrated.mp4.txt
+    md5: ae5a45d9e0ac9e649b9a74a78ece3900
+validation:
+  cmd: ../../darknet/darknet detector valid ./config/traffic.data ./config/traffic.cfg
+    ./backup/traffic_final.weights -dont_show
+  deps:
+  - path: ./backup/traffic_final.weights
+    md5: a2b25775eedeaf057465ca11b957f7a9
+  - path: ./config/traffic.cfg
+    md5: 2d8d73869d42c11f35576f0275229311
+  - path: ./config/traffic.data
+    md5: 9a219c737c869426a16787d5d26ab4db
+  outs:
+  - path: ./results/
+    md5: b53894c005a7aa7c5813e748237ddf45.dir
+res-convert:
+  cmd: python result2json.py ./result_in_json/ res_for_eval.json
+  deps:
+  - path: ./config/traffic.data
+    md5: 9a219c737c869426a16787d5d26ab4db
+  - path: ./results
+    md5: b53894c005a7aa7c5813e748237ddf45.dir
+  - path: result2json.py
+    md5: 3aba61b28287c66c3595c4b022a2e818
+  outs:
+  - path: ./result_in_json/res_for_eval.json
+    md5: 37268314da634db18c7fa86cca21c76a
+evaluation:
+  cmd: python evaluation.py ./traffic_video_GP010589_190720_0310_0440_90sec_calibrated_stable.json
+    ./result_in_json/res_for_eval.json
+  deps:
+  - path: ./result_in_json/res_for_eval.json
+    md5: 37268314da634db18c7fa86cca21c76a
+  - path: evaluation.py
+    md5: f5707319a831ea89bd90f57927e06cb6
+  outs:
+  - path: metrics.json
+    md5: adac42b67f8d3826b39d4e03d081e161
