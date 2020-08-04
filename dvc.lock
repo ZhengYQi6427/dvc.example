@@ -15,7 +15,7 @@ validation:
   - path: ./backup/traffic_final.weights
     md5: a2b25775eedeaf057465ca11b957f7a9
   - path: ./config/traffic.cfg
-    md5: 2d8d73869d42c11f35576f0275229311
+    md5: cb78f4ab67df79b828db0749a6d540ac
   - path: ./config/traffic.data
     md5: 9a219c737c869426a16787d5d26ab4db
   outs:

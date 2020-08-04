@@ -21,7 +21,7 @@ jobs:
           # python evaluation.py ./traffic_video_GP010589_190720_0310_0440_90sec_calibrated_stable.json ./result_in_json/res_for_eval.json
 
           # Report metrics
-          echo "## Metrics" >> report.md
+          cat metrics.json >> report.md
           git fetch --prune
           dvc metrics diff b1 --show-md >> report.md
 
