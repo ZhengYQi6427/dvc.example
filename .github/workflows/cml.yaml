@@ -11,13 +11,13 @@ jobs:
         env:
         run: |
           # validation
-          ../../darknet/darknet detector valid ./config/traffic.data ./config/traffic.cfg ./backup/traffic_final.weights -dont_show
+          # ../../darknet/darknet detector valid ./config/traffic.data ./config/traffic.cfg ./backup/traffic_final.weights -dont_show
 
           # convert result
-          python result2json.py ./result_in_json/ res_for_eval.json
+          # python result2json.py ./result_in_json/ res_for_eval.json
 
           # evaluate
-          python evaluation.py ./traffic_video_GP010589_190720_0310_0440_90sec_calibrated_stable.json ./result_in_json/res_for_eval.json
+          # python evaluation.py ./traffic_video_GP010589_190720_0310_0440_90sec_calibrated_stable.json ./result_in_json/res_for_eval.json
 
           # Report metrics
           echo "## Metrics" >> report.md
