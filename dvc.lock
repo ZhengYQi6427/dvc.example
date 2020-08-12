@@ -33,3 +33,14 @@ res-convert:
   outs:
   - path: ./result_in_json/res_for_eval.json
     md5: 37268314da634db18c7fa86cca21c76a
+evaluation:
+  cmd: python evaluation.py ./traffic_video_GP010589_190720_0310_0440_90sec_calibrated_stable.json
+    ./result_in_json/res_for_eval.json
+  deps:
+  - path: ./result_in_json/res_for_eval.json
+    md5: 37268314da634db18c7fa86cca21c76a
+  - path: evaluation.py
+    md5: f5707319a831ea89bd90f57927e06cb6
+  outs:
+  - path: metrics.json
+    md5: 7e93bd29c3d3bfa26d2710718f886e9b
