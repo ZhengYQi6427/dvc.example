@@ -8,3 +8,16 @@ testSet:
   outs:
   - path: test_HIKL2D200326T170529_3_0458_0628_calibrated.mp4.txt
     md5: ae5a45d9e0ac9e649b9a74a78ece3900
+validation:
+  cmd: ../../darknet/darknet detector valid ./config/traffic.data ./config/traffic.cfg
+    ./backup/traffic_final.weights -dont_show
+  deps:
+  - path: ./backup/traffic_final.weights
+    md5: a2b25775eedeaf057465ca11b957f7a9
+  - path: ./config/traffic.cfg
+    md5: 2d8d73869d42c11f35576f0275229311
+  - path: ./config/traffic.data
+    md5: 9a219c737c869426a16787d5d26ab4db
+  outs:
+  - path: ./results/
+    md5: b53894c005a7aa7c5813e748237ddf45.dir

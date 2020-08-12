@@ -6,3 +6,13 @@ stages:
     - generate_testset.py
     outs:
     - test_HIKL2D200326T170529_3_0458_0628_calibrated.mp4.txt
+  validation:
+    cmd: ../../darknet/darknet detector valid ./config/traffic.data ./config/traffic.cfg
+      ./backup/traffic_final.weights -dont_show
+    deps:
+    - ./backup/traffic_final.weights
+    - ./config/traffic.cfg
+    - ./config/traffic.data
+    outs:
+    - ./results/:
+        persist: true
