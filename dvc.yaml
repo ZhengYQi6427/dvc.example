@@ -1,0 +1,8 @@
+stages:
+  testSet:
+    cmd: python generate_testset.py ./data/test/
+    deps:
+    - ./data/test/HIKL2D200326T170529_3_0458_0628_calibrated.mp4
+    - generate_testset.py
+    outs:
+    - test_HIKL2D200326T170529_3_0458_0628_calibrated.mp4.txt
