@@ -1,0 +1,10 @@
+testSet:
+  cmd: python generate_testset.py ./data/test/
+  deps:
+  - path: ./data/test/HIKL2D200326T170529_3_0458_0628_calibrated.mp4
+    md5: 89842ce559d3885548d67d51aa762fda
+  - path: generate_testset.py
+    md5: 213489fd0ffd0df7eaeef875ed3fae05
+  outs:
+  - path: test_HIKL2D200326T170529_3_0458_0628_calibrated.mp4.txt
+    md5: ae5a45d9e0ac9e649b9a74a78ece3900
