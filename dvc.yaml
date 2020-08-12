@@ -16,3 +16,11 @@ stages:
     outs:
     - ./results/:
         persist: true
+  res-convert:
+    cmd: python result2json.py ./result_in_json/ res_for_eval.json
+    deps:
+    - ./config/traffic.data
+    - ./results
+    - result2json.py
+    outs:
+    - ./result_in_json/res_for_eval.json

@@ -21,3 +21,15 @@ validation:
   outs:
   - path: ./results/
     md5: b53894c005a7aa7c5813e748237ddf45.dir
+res-convert:
+  cmd: python result2json.py ./result_in_json/ res_for_eval.json
+  deps:
+  - path: ./config/traffic.data
+    md5: 9a219c737c869426a16787d5d26ab4db
+  - path: ./results
+    md5: b53894c005a7aa7c5813e748237ddf45.dir
+  - path: result2json.py
+    md5: 3aba61b28287c66c3595c4b022a2e818
+  outs:
+  - path: ./result_in_json/res_for_eval.json
+    md5: f498af6d5d40aa5336143b1d1b82f9aa
