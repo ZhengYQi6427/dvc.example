@@ -1,0 +1,3 @@
+outs:
+- md5: a2b25775eedeaf057465ca11b957f7a9
+  path: traffic_final.weights
